@@ -1,6 +1,6 @@
 #! python3
 
-# Organize.py - this program will copy a file(s) with a certain file extension to a desired folder in D:\Omar\<Extension_like_FolderName>
+# Organize.py - this program will move a file(s) with a certain file extension to a desired folder in D:\Omar\<Extension_like_FolderName>
 
 # e.g. >>> C:\Users\Omar\Downloads\Text File.txt >>> copy>>> D:\Omar\Text Document
 # each file with a certain extension needs to be on <Extension_like_FolderName> folder i.e. image.jpg >>> JPG Pictures
@@ -86,7 +86,7 @@ for i in range(len(Folders_to_scan)):
                                 logging.info(f'File already exists in folder: {newFolderName}')  
                                 break # move to the next file
                             
-                            # Copy the file using shutil.copy into the desired folder that matches extesion type >>> D:\Omar\<Extension_like_FolderName>
-                            shutil.copy(fr"{Folder}\{file}", newFolderName)
+                            # Move the file using shutil.move() into the desired folder that matches extesion type >>> D:\Omar\<Extension_like_FolderName>
+                            shutil.move(fr"{Folder}\{file}", newFolderName) # Oh boy!!
                             logging.debug(f'File copied to >>> {newFolderName}')    
                             break # NEXT FILE PLEASE!!!
