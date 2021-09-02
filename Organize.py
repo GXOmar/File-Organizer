@@ -31,7 +31,7 @@ Allow_ExtensionType =  (
 # Move to... 
 os.chdir('C:\\Users\\Omar') 
 # specify the folders you want to scan.
-Folders_to_scan = ('\\Desktop', '\\Documents', '\\Downloads', '\\Music', '\\Pictures', '\\Videos')
+Folders_to_search = ('\\Desktop', '\\Downloads', '\\Music', '\\Pictures', '\\Videos')
 
 dst_folder = {
     # this helper dict is to sort the files with similar extension_type to a Folder! i.e all text_based files sholud be moved to Documents
@@ -78,8 +78,8 @@ def FolderName(filexe):
 
 # search the folder's tree for files with certain extension type.
 def main():
-    for i in range(len(Folders_to_scan)):
-        for Folder, subFolder, FilesNames in os.walk(os.getcwd() + Folders_to_scan[i]):
+    for i in range(len(Folders_to_search)):
+        for Folder, subFolder, FilesNames in os.walk(os.getcwd() + Folders_to_search[i]):
             # print(f'Current Folder {Folder}')
                     
             for file in FilesNames:
