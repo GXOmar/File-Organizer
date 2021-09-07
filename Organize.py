@@ -6,13 +6,13 @@
 # each file with a certain extension needs to be on <Extension_like_FolderName> folder i.e. image.jpg >>> JPG Pictures
 
 # run the program in CLI using >>> py Organize.py 
-
+# TODO: Priorities what file type get checked and moved, lighters file like (Music and Images) gets moved first, then big file like mp4.
 import os, shutil, logging
 
 logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
 
 def decodeName(name):
-    # NO NEED FOR THIS FUNCTION, ONLY NEEDED TO PRINT ON SCREEN!!
+    # NO NEED FOR THIS FUNCTION, ONLY NEEDED TO PRINT THE FILE NAMES ON SCREEN!!
     if type(name) == str: # leave unicode ones alone
         try:
             name = name.encode('utf8')
@@ -24,8 +24,8 @@ def decodeName(name):
 Allow_ExtensionType =  (
     '.html', '.docx', '.csv', '.pdf', '.txt',
     '.mp3',
-    '.mp4', '.mov', '.mkv', '.wmv',
     '.jpeg', '.jpg', '.png', '.avif', '.gif'
+    '.mp4', '.mov', '.mkv', '.wmv',
 )
 
 # Move to... 
@@ -51,7 +51,7 @@ def create_dir(path):
 def FolderName(filexe):
     '''This function is to customize the Folder name based on the file extension'''
     format_file_extension = {
-        # inside the Document Floder
+        # inside the Document Floder   
         '.docx': 'Word',   # Word Document
         '.csv': 'Excel',   # Execl Document
         '.pdf': 'PDF',     # PDF Document
@@ -81,7 +81,9 @@ def main():
     for i in range(len(Folders_to_search)):
         for Folder, subFolder, FilesNames in os.walk(os.getcwd() + Folders_to_search[i]):
             # print(f'Current Folder {Folder}')
-                    
+            # Folder with 'SAFE' at the beginning of their names are ignored from being searched
+            if os.path.basename(Folder).startswith('SAFE'):
+                continue # ignore this Folder
             for file in FilesNames:
                 FileExtension = os.path.splitext(file)[1]
 
