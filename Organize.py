@@ -22,10 +22,10 @@ def decodeName(name):
 
 # specify the type of file's extension you want to work with.
 Allow_ExtensionType =  (
-    '.html', '.docx', '.csv', '.pdf', '.txt',
+    '.html', '.docx', '.csv', '.pdf', '.txt', '.cfg',
     '.mp3',
-    '.jpeg', '.jpg', '.png', '.avif', '.gif'
-    '.mp4', '.mov', '.mkv', '.wmv',
+    '.jpeg', '.jpg', '.png', '.avif',
+    '.mp4', '.mov', '.mkv', '.wmv', '.gif'
 )
 
 # Move to... 
@@ -35,7 +35,7 @@ Folders_to_search = ('\\Desktop', '\\Downloads', '\\Music', '\\Pictures', '\\Vid
 
 dst_folder = {
     # this helper dict is to sort the files with similar extension_type to a Folder! i.e all text_based files sholud be moved to Documents
-    '\\Documents' : ('.html', '.docx', '.csv', '.pdf', '.txt'),
+    '\\Documents' : ('.html', '.docx', '.csv', '.pdf', '.txt', '.cfg'),
     '\\Music'     : ('.mp3',),
     '\\Pictures'  : ('.jpeg', '.jpg', '.png', '.avif'),
     '\\Videos'    : ('.mp4', '.mov', '.mkv', '.wmv', '.gif')
@@ -52,27 +52,28 @@ def FolderName(filexe):
     '''This function is to customize the Folder name based on the file extension'''
     format_file_extension = {
         # inside the Document Floder   
-        '.docx': 'Word',   # Word Document
-        '.csv': 'Excel',   # Execl Document
-        '.pdf': 'PDF',     # PDF Document
-        '.txt': 'Text',    # Text Document
-        '.html': 'HTML',   # HTML Document
+        '.docx': 'Word Documents',   # Word Documents
+        '.csv': 'Excel Documents',   # Execl Documents
+        '.pdf': 'PDF Documents',     # PDF Documents
+        '.txt': 'Text Documents',    # Text Documents
+        '.html': 'HTML Documents',   # HTML Documents
+        '.cfg': 'Configuration Files',  # Configuration Files
 
         # inside the Music Floder
-        '.mp3': 'MP3',     # MP3 Music
+        '.mp3': 'MP3 Music',     # MP3 Music
         
         # inside the pictures Folder
-        '.jpeg': 'JPEG',   # JPEG Pictures
-        '.jpg': 'JPG',     # JPG Pictures   
-        '.png': 'PNG',     # PNG Pictures
-        '.avif': 'AVIF',   # AVIF Pictures
+        '.jpeg': 'JPEG Pictures',   # JPEG Pictures
+        '.jpg': 'JPG Pictures',     # JPG Pictures   
+        '.png': 'PNG Pictures',     # PNG Pictures
+        '.avif': 'AVIF Pictures',   # AVIF Pictures
         
         # inside the Videos Folder
-        '.mp4': 'MP4',     # MP4 Videos
-        '.mov': 'MOV',     # MOV Videos
-        '.mkv': 'MKV',     # MKV Videos
-        '.wmv': 'WMV',     # WMV Videos
-        '.gif': 'GIF'      # GIF Videos
+        '.mp4': 'MP4 Videos',     # MP4 Videos
+        '.mov': 'MOV Videos',     # MOV Videos
+        '.mkv': 'MKV Videos',     # MKV Videos
+        '.wmv': 'WMV Videos',     # WMV Videos
+        '.gif': 'GIF Videos'      # GIF Videos
     }
     return format_file_extension.get(filexe, "Key Not Found!")
 
@@ -99,7 +100,7 @@ def main():
 
                     for extension_catagory in dst_folder.items(): # check what kind of extension!                       
                         if FileExtension in extension_catagory[1]:
-                            newFolderName = create_dir(f"D:\\Omar{extension_catagory[0]}\{FolderName(FileExtension)} {extension_catagory[0][1:]}")
+                            newFolderName = create_dir(f"D:\\Omar{extension_catagory[0]}\{FolderName(FileExtension)}")
                             
                             if os.path.exists(newFolderName + '\\' + file):
                                 logging.debug(f'File already exists in: {newFolderName}')  
