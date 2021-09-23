@@ -79,8 +79,16 @@ def FolderName(filexe):
 # search the folder's tree for files with certain extension type.
 def main():
     for i in range(len(Folders_to_search)):
-        for Folder, subFolder, FilesNames in os.walk(os.getcwd() + Folders_to_search[i]):
+        for Folder, subFolders, FilesNames in os.walk(os.getcwd() + Folders_to_search[i]):
             # print(f'Current Folder {Folder}')
+
+            # ignore searshing through subFolders
+            del subFolders[:] # Modifying the list in place
+            # This will modify ths list instead of deleting it,
+            # Deleting the list will case a <NameError> upon using the list in code,
+            # Deleting without using the list wont work either because that's how os.walk() work.
+            #                                ¯\_(ツ)_/¯
+
             # Folder with 'SAFE' at the beginning of their names are ignored from being searched
             if os.path.basename(Folder).startswith('SAFE'):
                 continue # ignore this Folder
