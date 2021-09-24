@@ -10,7 +10,7 @@
 import os, shutil, logging
 import Folder_name 
 
-logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.DEBUG, filename='moved_files.log', format='[%(asctime)s] %(message)s\n')
 
 def decodeName(name):
     # NO NEED FOR THIS FUNCTION, ONLY NEEDED TO PRINT THE FILE NAMES ON SCREEN!!
@@ -47,6 +47,7 @@ def create_dir(path):
     if os.path.isdir(path): 
         return path # folder does exists!
     os.mkdir(path) # folder doesn't exists, make one.
+    logging.info(f'-----NEW FOLDER CREATED----- {path}')
     return path
 
 def FolderName(filextension):
@@ -74,25 +75,21 @@ def main():
 
                 if FileExtension in Allow_ExtensionType:
 
-                    for extension_catagory in dst_folder.items(): # check what kind of extension!                       
-                        if FileExtension in extension_catagory[1]:
-                            newFolderName = create_dir(f"D:\\Omar{extension_catagory[0]}\{FolderName(FileExtension)}")
+                    for extension_category in dst_folder.items(): # check what kind of extension!                       
+                        if FileExtension in extension_category[1]:
+                            newFolderName = create_dir(f"D:\\Omar{extension_category[0]}\{FolderName(FileExtension)}")
                             
                             if os.path.exists(newFolderName + '\\' + file):
-                                logging.debug(f'File already exists in: {newFolderName}')  
+                                logging.error(f'---File: "{file}" already exists in: {newFolderName}---')  
                                 break # move to the next file
                             
-                            # Move the file using shutil.move() into the desired folder that matches extesion type >>> D:\Omar\<Extension_like_FolderName>
+                            # Move the file using shutil.move() into the desired folder that matches extension type >>> D:\Omar\<Extension_like_FolderName>
                             shutil.move(fr"{Folder}\{file}", newFolderName) # Oh boy!!
-                            logging.info(f'File moved to: {newFolderName}')    
+                            FileSize = os.path.getsize(newFolderName + '\\' + file) / 1000 # convert to Kilobytes
+                            logging.info(f'File: "{file}" Size: {FileSize}KB\n\tmoved from: {Folder} >> {newFolderName}')    
                             break # NEXT FILE PLEASE!!!
-
-# TODO: move the folder that holds the content insted of moving the content them self, for better organization!
-    # the Problem with this is if there is a *.txt inside a Pictures folder with xNum photos!
-        # what's gonna happend to this .txt?
-            # MAYBE! create a parent folder with the same name of that folder to only
-            # contain the .txt file and then move this folder inside Text Document!
-            # not really cool but yeah you gonna end up with a lot of folder <LOL/>
-            
+                                
 if __name__ == '__main__':
+    logging.debug("Start".center(70, '-'))
     main()
+    logging.debug("End".center(70, '-'))

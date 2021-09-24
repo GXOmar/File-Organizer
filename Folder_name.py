@@ -8,7 +8,7 @@ Folder_file_extension = {
 
     # inside the Document Floder   
     '.docx': 'Word Documents',   # Word Documents
-    '.csv': 'Excel Documents',   # Execl Documents
+    '.csv': 'Excel Documents',   # Excel Documents
     '.pdf': 'PDF Documents',     # PDF Documents
     '.txt': 'Text Documents',    # Text Documents
     '.html': 'HTML Documents',   # HTML Documents
