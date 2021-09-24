@@ -8,6 +8,7 @@
 # run the program in CLI using >>> py Organize.py 
 # TODO: Priorities what file type get checked and moved, lighters file like (Music and Images) gets moved first, then big file like mp4.
 import os, shutil, logging
+import Folder_name 
 
 logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
 
@@ -48,34 +49,9 @@ def create_dir(path):
     os.mkdir(path) # folder doesn't exists, make one.
     return path
 
-def FolderName(filexe):
-    '''This function is to customize the Folder name based on the file extension'''
-    format_file_extension = {
-        # inside the Document Floder   
-        '.docx': 'Word Documents',   # Word Documents
-        '.csv': 'Excel Documents',   # Execl Documents
-        '.pdf': 'PDF Documents',     # PDF Documents
-        '.txt': 'Text Documents',    # Text Documents
-        '.html': 'HTML Documents',   # HTML Documents
-        '.cfg': 'Configuration Files',  # Configuration Files
-
-        # inside the Music Floder
-        '.mp3': 'MP3 Music',     # MP3 Music
-        
-        # inside the pictures Folder
-        '.jpeg': 'JPEG Pictures',   # JPEG Pictures
-        '.jpg': 'JPG Pictures',     # JPG Pictures   
-        '.png': 'PNG Pictures',     # PNG Pictures
-        '.avif': 'AVIF Pictures',   # AVIF Pictures
-        
-        # inside the Videos Folder
-        '.mp4': 'MP4 Videos',     # MP4 Videos
-        '.mov': 'MOV Videos',     # MOV Videos
-        '.mkv': 'MKV Videos',     # MKV Videos
-        '.wmv': 'WMV Videos',     # WMV Videos
-        '.gif': 'GIF Videos'      # GIF Videos
-    }
-    return format_file_extension.get(filexe, "Key Not Found!")
+def FolderName(filextension):
+    '''This function is to get a Folder name based on the file extension'''
+    return Folder_name.Folder_file_extension.get(filextension, "Key Not Found!")
 
 # search the folder's tree for files with certain extension type.
 def main():
