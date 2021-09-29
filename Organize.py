@@ -54,8 +54,11 @@ def FolderName(filextension):
     '''This function is to get a Folder name based on the file extension'''
     return Folder_name.Folder_file_extension.get(filextension, "Key Not Found!")
 
+CountFiles = 0 # To count the number of files been moved
+
 # search the folder's tree for files with certain extension type.
 def main():
+    global CountFiles
     for i in range(len(Folders_to_search)):
         for Folder, subFolders, FilesNames in os.walk(os.getcwd() + Folders_to_search[i]):
             # print(f'Current Folder {Folder}')
@@ -85,11 +88,18 @@ def main():
                             
                             # Move the file using shutil.move() into the desired folder that matches extension type >>> D:\Omar\<Extension_like_FolderName>
                             shutil.move(fr"{Folder}\{file}", newFolderName) # Oh boy!!
+                            CountFiles += 1  
                             FileSize = os.path.getsize(newFolderName + '\\' + file) / 1000 # convert to Kilobytes
                             logging.info(f'File: "{file}" Size: {FileSize}KB\n\tmoved from: {Folder} >> {newFolderName}')    
                             break # NEXT FILE PLEASE!!!
-                                
 if __name__ == '__main__':
     logging.debug("Start".center(70, '-'))
     main()
     logging.debug("End".center(70, '-'))
+    
+    dash_separator = ''.center(20, '-')
+    if CountFiles != 0:
+        print(dash_separator, f"{CountFiles} Files were moved" if CountFiles >= 2 \
+            else f"{CountFiles} File were moved", dash_separator, sep='\n')
+    else:
+        print(dash_separator, 'No Files were moved',dash_separator, sep='\n')
